@@ -1,6 +1,8 @@
 import React from "react";
 import { Typography, TextField, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { auth } from "../../helpers/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 interface RegisterFormValues {
   email: string;
@@ -11,13 +13,27 @@ interface RegisterFormValues {
 const RegisterForm = () => {
   const { register, handleSubmit } = useForm<RegisterFormValues>();
 
-  const submitHandler = (data: RegisterFormValues) => {
-    console.log(data);
+  const registerUserWithFormData = ({
+    email,
+    password,
+    password2,
+  }: RegisterFormValues) => {
+    if (password === password2) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          console.log("Successfully registered new user");
+        })
+        .catch((err) => {
+          console.log(`Failed to register new user, ${err.message}`);
+        });
+    } else {
+      alert("Password are not equal!");
+    }
   };
 
   return (
     <form
-      onSubmit={handleSubmit(submitHandler)}
+      onSubmit={handleSubmit(registerUserWithFormData)}
       style={{ display: "flex", flexDirection: "column" }}
     >
       <Typography variant="h2" align="center" sx={{ fontSize: "1.5rem" }}>

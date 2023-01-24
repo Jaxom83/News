@@ -47,9 +47,10 @@ const HomePage = () => {
         setTodaysArticles(data.data.articles);
       });
   }, []);
-  // FETCH + USEEFFECT TO NIE JEST NAJLEPSZY SPOSÓB NA KOMUNIKACJE Z API W REACTCIE, ALTERNATYEWA: REACT QUERY, TEN SPOSÓB JEST MIMO WSZYSTKO OK
+  // FETCH + USEEFFECT TO NIE JEST NAJLEPSZY SPOSÓB NA KOMUNIKACJE Z API W REACTCIE, ALTERNATYEWA: REACT QUERY, TEN SPOSÓB
+  // JEST MIMO WSZYSTKO OK
   const typographyStyles = { fontSize: "2rem", mt: ".8rem" };
-  //const elementsArray = [1,2,3,4,5,6,7,8,9,10,11];
+
   return (
     <>
       <Typography variant="h2" align="center" sx={typographyStyles}>
